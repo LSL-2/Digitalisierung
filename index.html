@@ -2,33 +2,88 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Kurzbericht Formular</title>
+  <title>Regiebericht Formular</title>
+  <style>
+    body { font-family: sans-serif; max-width: 900px; margin: auto; }
+    label { font-weight: bold; display: block; margin-top: 10px; }
+    textarea, input, select { width: 100%; padding: 5px; margin-top: 4px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th, td { border: 1px solid #ccc; padding: 6px; text-align: left; }
+    .half { width: 48%; display: inline-block; vertical-align: top; }
+    .section { border: 1px solid #ccc; padding: 10px; margin-top: 20px; }
+  </style>
 </head>
 <body>
-  <h1>Kurzbericht eingeben</h1>
-  <form action="https://htwg.walz40.eu/webhook/kurzbericht" method="POST">
 
-    <label for="name">Name:</label><br>
-    <input type="text" name="name" id="name" required><br><br>
+<h1>Regiebericht</h1>
+<form action="https://htwg.walz40.eu/webhook/kurzbericht" method="POST">
 
-    <label for="datum">Datum:</label><br>
-    <input type="date" name="datum" id="datum" value="" required><br><br>
+  <div class="section">
+    <h3>Auftraggeber</h3>
+    <label>Name</label><input type="text" name="ag_name" required>
+    <label>Straße, Nr.</label><input type="text" name="ag_strasse">
+    <label>PLZ, Ort</label><input type="text" name="ag_plz_ort">
+    <label>Telefon</label><input type="text" name="ag_telefon">
+    <label>E-Mail</label><input type="email" name="ag_email">
+    <label>Ansprechpartner</label><input type="text" name="ag_ansprechpartner">
+  </div>
 
-    <label for="email">E-Mail:</label><br>
-    <input type="email" name="email" id="email" required><br><br>
+  <div class="section">
+    <h3>Projekt / Objekt</h3>
+    <label>Bezeichnung</label><input type="text" name="projekt_bezeichnung">
+    <label>Leistungszeitraum</label><input type="text" name="leistungszeitraum">
+    <label>Straße, Nr.</label><input type="text" name="projekt_strasse">
+    <label>PLZ, Ort</label><input type="text" name="projekt_plz_ort">
+  </div>
 
-    <label for="projektnummer">Projektnummer:</label><br>
-    <input type="text" name="projektnummer" id="projektnummer" required><br><br>
+  <div class="section">
+    <h3>Leistungsbeschreibung / Ausgeführte Arbeiten</h3>
+    <textarea name="beschreibung" rows="5"></textarea>
+    <h3>Zusatzarbeiten</h3>
+    <textarea name="zusatzarbeiten" rows="3"></textarea>
+  </div>
 
-    <label for="bericht">Bericht:</label><br>
-    <textarea name="bericht" id="bericht" rows="5" cols="40" required></textarea><br><br>
+  <div class="section">
+    <h3>Mitarbeiter</h3>
+    <table>
+      <thead><tr><th>Mitarbeiter</th><th>Rolle</th><th>Std</th></tr></thead>
+      <tbody>
+        <tr><td><input type="text" name="ma1_name"></td><td><input type="text" name="ma1_rolle"></td><td><input type="text" name="ma1_std"></td></tr>
+        <tr><td><input type="text" name="ma2_name"></td><td><input type="text" name="ma2_rolle"></td><td><input type="text" name="ma2_std"></td></tr>
+      </tbody>
+    </table>
+  </div>
 
-    <button type="submit">Senden</button>
-  </form>
+  <div class="section">
+    <div class="half">
+      <h3>Menge / Maschine / Gerät</h3>
+      <textarea name="maschinen" rows="5"></textarea>
+    </div>
+    <div class="half">
+      <h3>Materialverbrauch</h3>
+      <textarea name="material" rows="5"></textarea>
+    </div>
+  </div>
 
-  <script>
-    // Datum automatisch auf heute setzen
-    document.getElementById("datum").value = new Date().toISOString().split('T')[0];
-  </script>
+  <div class="section">
+    <h3>Anmerkungen</h3>
+    <textarea name="anmerkungen" rows="3"></textarea>
+  </div>
+
+  <div class="section">
+    <h3>Arbeitsstatus</h3>
+    <label><input type="checkbox" name="abgeschlossen" value="ja"> Arbeiten abgeschlossen</label><br>
+    <label>Folgende Arbeiten noch zu erledigen:</label>
+    <textarea name="offene_arbeiten" rows="3"></textarea>
+  </div>
+
+  <div class="section">
+    <label>Ort</label><input type="text" name="ort">
+    <label>Datum</label><input type="date" name="datum">
+  </div>
+
+  <button type="submit">Senden</button>
+</form>
+
 </body>
 </html>
