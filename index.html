@@ -7,9 +7,28 @@
 <body>
   <h1>Kurzbericht eingeben</h1>
   <form action="https://htwg.walz40.eu/webhook/kurzbericht" method="POST">
+
+    <label for="name">Name:</label><br>
+    <input type="text" name="name" id="name" required><br><br>
+
+    <label for="datum">Datum:</label><br>
+    <input type="date" name="datum" id="datum" value="" required><br><br>
+
+    <label for="email">E-Mail:</label><br>
+    <input type="email" name="email" id="email" required><br><br>
+
+    <label for="projektnummer">Projektnummer:</label><br>
+    <input type="text" name="projektnummer" id="projektnummer" required><br><br>
+
     <label for="bericht">Bericht:</label><br>
     <textarea name="bericht" id="bericht" rows="5" cols="40" required></textarea><br><br>
+
     <button type="submit">Senden</button>
   </form>
+
+  <script>
+    // Datum automatisch auf heute setzen
+    document.getElementById("datum").value = new Date().toISOString().split('T')[0];
+  </script>
 </body>
 </html>
